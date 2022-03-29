@@ -53,6 +53,13 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => "required|string|email|max:255|unique:users",
+            'address'=> 'required|string',
+
+        ]);
         $customer = new Customer;
         $customer->fill($request->all());
         $customer->save();
