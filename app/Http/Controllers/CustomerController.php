@@ -57,7 +57,7 @@ class CustomerController extends Controller
         $customer->fill($request->all());
         $customer->save();
 
-        return response()->json(['saved' => 'true', 'id' => $customer->id]);
+        return response()->json(['saved' => true, 'id' => $customer->id]);
 
     }
 

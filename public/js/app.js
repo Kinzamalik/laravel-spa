@@ -2442,7 +2442,11 @@ function initialize(to) {
       this.errors = {};
       this.isProcessing = true;
       (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.byMethod)(this.method, this.store, this.form).then(function (res) {
-        if (res.form && res.form.saved) {
+        console.log(res.data);
+
+        if (res.data && res.data.saved) {
+          console.log(res);
+
           _this2.success(res);
         }
       })["catch"](function (error) {
@@ -2454,8 +2458,11 @@ function initialize(to) {
       });
     },
     success: function success(res) {
-      vue__WEBPACK_IMPORTED_MODULE_2__["default"].set(this.$form, 'form', {});
-      this.isProcessing = false;
+      console.log(res);
+      vue__WEBPACK_IMPORTED_MODULE_2__["default"].set(this.$data, 'form', {});
+      console.log(this.isProcessing); // Vue.set(this.$data, 'isProcessing', false);
+      // this.isProcessing = false
+
       this.$router.push("".concat(this.resource, "/").concat(res.data.id));
     }
   }

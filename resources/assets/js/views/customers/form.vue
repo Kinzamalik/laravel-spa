@@ -108,7 +108,9 @@
                 this.isProcessing = true
                 byMethod(this.method, this.store, this.form)
                     .then((res) => {
-                        if(res.form && res.form.saved) {
+                        console.log(res.data);
+                        if(res.data && res.data.saved) {
+                            console.log(res);
                             this.success(res)
                         }
                     })
@@ -120,8 +122,11 @@
                     })
             },
             success(res) {
-                Vue.set(this.$form, 'form', {})
-                this.isProcessing = false
+                console.log(res);
+                Vue.set(this.$data, 'form', {});
+                console.log(this.isProcessing);
+                // Vue.set(this.$data, 'isProcessing', false);
+                // this.isProcessing = false
 
                 this.$router.push(`${this.resource}/${res.data.id}`)
             }
