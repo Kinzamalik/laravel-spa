@@ -16,4 +16,11 @@ class Customer extends Model
     {
         return $this->attributes['firstname'] . ' - ' . $this->attributes['lastname'];
     }
+
+
+      public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
 }

@@ -3,8 +3,8 @@
         <div class="panel-heading">
             <span class="panel-title">{{model.number}}</span>
             <div>
-                <router-link to="/invoices" class="btn">Back</router-link>
-                <router-link :to="`/invoices/${model.id}/edit`" class="btn">Edit</router-link>
+                <router-link to="/products" class="btn">Back</router-link>
+                <router-link :to="`/products/${model.id}/edit`" class="btn">Edit</router-link>
                 <button class="btn btn-error" @click="deleteItem">Delete</button>
             </div>
         </div>
@@ -23,7 +23,7 @@
                             <tbody>
                                 <tr>
                                     <td colspan="2">
-                                        <span class="document-title">INVOICE</span>
+                                        <span class="document-title">PRODUCT</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -100,20 +100,20 @@
             return {
                 show: false,
                 model: {
-                   
+                    items: [],
                     customer: {}
                 }
             }
         },
         beforeRouteEnter(to, from, next) {
-            get(`/api/invoices/${to.params.id}`)
+            get(`/api/products/${to.params.id}`)
                 .then((res) => {
                     next(vm => vm.setData(res))
                 })
         },
         beforeRouteUpdate(to, from, next) {
             this.show = false
-            get(`/api/invoices/${to.params.id}`)
+            get(`/api/products/${to.params.id}`)
                 .then((res) => {
                     this.setData(res)
                     next()
@@ -126,10 +126,10 @@
                 this.$bar.finish()
             },
             deleteItem() {
-                byMethod('delete', `/api/invoices/${this.model.id}`)
+                byMethod('delete', `/api/products/${this.model.id}`)
                     .then((res) => {
                         if(res.data.deleted) {
-                            this.$router.push('/invoices')
+                            this.$router.push('/products')
                         }
                     })
             }
