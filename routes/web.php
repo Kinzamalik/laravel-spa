@@ -13,6 +13,6 @@ Route::resource('/api/invoices', InvoiceController::class);
 
 Route::resource('/api/customers', CustomerController::class);
 
-// Route::get('/api/customers', [App\Http\Controllers\CustomerController::in]);
-// Route::get('/api/products', [App\Http\Controllers\ProductController::class]);
-// Route::resource('/api/invoices', [App\Http\Controllers\ProductController::class]);
+
+
+

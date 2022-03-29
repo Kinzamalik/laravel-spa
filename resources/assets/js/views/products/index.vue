@@ -13,21 +13,17 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Date</th>
-                        <th>Number</th>
-                        <th>Products</th>
-                        <th>Due Date</th>
-                        <th>Total</th>
+                        <th>Item code</th>
+                        <th>Description</th>
+                        <th>Unit Price</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
                         <td class="w-1">{{item.id}}</td>
-                        <td class="w-3">{{item.date}}</td>
-                        <td class="w-3">{{item.number}}</td>
-                        <td class="w-9">{{item.customer.text}}</td>
-                        <td class="w-3">{{item.due_date}}</td>
-                        <td class="w-3">{{item.total | formatMoney}}</td>
+                        <td class="w-3">{{item.item_code}}</td>
+                        <td class="w-3">{{item.description}}</td>
+                        <td class="w-9">{{item.unit_price}}</td>
                     </tr>
                 </tbody>
             </table>

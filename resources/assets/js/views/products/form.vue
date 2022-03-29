@@ -15,132 +15,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>
-                            Number
-                            <small>Auto Generated</small>
-                        </label>
-                        <span class="form-control">{{form.number}}</span>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>
-                            Reference
-                            <small>Optional</small>
-                        </label>
-                        <input type="text" class="form-control" v-model="form.reference">
-                        <small class="error-control" v-if="errors.reference">
-                            {{errors.reference[0]}}
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Date</label>
-                        <input type="date" class="form-control" v-model="form.date">
-                        <small class="error-control" v-if="errors.date">
-                            {{errors.date[0]}}
-                        </small>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Due Date</label>
-                        <input type="date" class="form-control" v-model="form.due_date">
-                        <small class="error-control" v-if="errors.due_date">
-                            {{errors.due_date[0]}}
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <table class="form-table">
-                <thead>
-                    <tr>
-                        <th>Item Description</th>
-                        <th>Unit Price</th>
-                        <th>Qty</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(item, index) in form.items">
-                        <td class="w-14">
-                            <typeahead :url="productURL" :initialize="item.product"
-                                @input="onProduct(index, $event)" />
-                            <small class="error-control" v-if="errors[`items.${index}.product_id`]">
-                                {{errors[`items.${index}.product_id`][0]}}
-                            </small>
-                        </td>
-                        <td class="w-4">
-                            <input type="text" class="form-control" v-model="item.unit_price">
-                            <small class="error-control" v-if="errors[`items.${index}.unit_price`]">
-                                {{errors[`items.${index}.unit_price`][0]}}
-                            </small>
-                        </td>
-                        <td class="w-2">
-                            <input type="text" class="form-control" v-model="item.qty">
-                            <small class="error-control" v-if="errors[`items.${index}.qty`]">
-                                {{errors[`items.${index}.qty`][0]}}
-                            </small>
-                        </td>
-                        <td class="w-4">
-                            <span class="form-control">
-                                {{Number(item.qty) * Number(item.unit_price) | formatMoney}}
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-remove" @click="removeItem(index)">&times;</span>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="2">
-                            <button class="btn btn-sm"
-                             @click="addNewLine">Add New Line</button>
-                        </td>
-                        <td class="form-summary">Sub Total</td>
-                        <td>{{subTotal | formatMoney}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="form-summary">Discount</td>
-                        <td>
-                            <input type="text" class="form-control" v-model="form.discount">
-                            <small class="form-control" v-if="errors.discount">
-                                {{errors.discount[0]}}
-                            </small>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="form-summary">Grand Total</td>
-                        <td>{{total | formatMoney}}</td>
-                    </tr>
-                </tfoot>
-            </table>
-            <hr>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <label>Terms and Conditions</label>
-                        <textarea class="form-control" v-model="form.terms_and_conditions"></textarea>
-                        <small class="error-control" v-if="errors.terms_and_conditions">
-                            {{errors.terms_and_conditions[0]}}
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="panel-footer flex-end">
-            <div>
-                <button class="btn btn-primary" :disabled="isProcessing" @click="onSave">Save</button>
-                <button class="btn" :disabled="isProcessing" @click="onCancel">Cancel</button>
-            </div>
-        </div>
+         
     </div>
 </template>
 <script type="text/javascript">
@@ -186,16 +61,7 @@
                     next()
                 })
         },
-        computed: {
-            subTotal() {
-                return this.form.items.reduce((carry, item) => {
-                    return carry + (Number(item.unit_price) * Number(item.qty))
-                }, 0)
-            },
-            total() {
-                return this.subTotal - Number(this.form.discount)
-            }
-        },
+   
         methods: {
             setData(res) {
                 Vue.set(this.$data, 'form', res.data.form)

@@ -18,14 +18,19 @@ class ProductController extends Controller
         return response()
             ->json(['results' => $results]);
     }
+
+
     public function search()
     {
 
         $results = Product::orderBy('item_code')
             ->when(request('q'), function ($query) {
                 $query->where('item_code', 'like', '%' . request('q') . '%')
-                    ->orWhere('description', 'like', '%' . request('q') . '%');
+                    ->orWhere('description', 'like', '%' . request('q') . '%')
+                    ->orWhere('unit_price', 'like', '%' . request('q') . '%');
             })
+
+          ->limit(6)
             ->get();
 
         return response()
@@ -34,14 +39,13 @@ class ProductController extends Controller
     }
     public function create()
     {
-        $counter = Counter::where('key', 'product')->first();
+        dd('hello from create');
 
         $form = [
-            "description" => null,
-            // 'product_id' => null,
-            // 'product' => null,
-            // 'unit_price' => 0,
-            // 'qty' => 1,
+            "id"=>'',
+            "item_code" =>'',
+            "description" => '',
+            'unit_price' => '',
         ];
 
         return response()
