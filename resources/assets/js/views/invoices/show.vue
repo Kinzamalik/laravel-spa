@@ -100,7 +100,7 @@
             return {
                 show: false,
                 model: {
-                    items: [],
+                   
                     customer: {}
                 }
             }
