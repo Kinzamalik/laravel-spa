@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Counter;
 use App\Models\Product;
-use DB;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -20,12 +18,11 @@ class ProductController extends Controller
             ->json(['results' => $results]);
     }
 
-
     public function create()
     {
 
         $form = [
-            "item_code" =>'',
+            "item_code" => '',
             "description" => '',
             'unit_price' => '',
         ];
@@ -37,14 +34,14 @@ class ProductController extends Controller
     public function search()
     {
 
-        $results = Product::orderBy('item_code')
+        $results = Product::orderBy('id')
             ->when(request('q'), function ($query) {
                 $query->where('item_code', 'like', '%' . request('q') . '%')
                     ->orWhere('description', 'like', '%' . request('q') . '%')
                     ->orWhere('unit_price', 'like', '%' . request('q') . '%');
             })
 
-          ->limit(6)
+            ->limit(6)
             ->get();
 
         return response()
@@ -52,31 +49,27 @@ class ProductController extends Controller
 
     }
 
-
     public function store(Request $request)
     {
-        dd('store')
-
         $product = new Product;
         $product->fill($request->all());
         $product->save();
-
-     
-        return response() ->json(['saved' => true, 'id' => $product->id]);
+        return response()->json(['saved' => true, 'id' => $product->id]);
     }
 
     public function show($id)
     {
-        $model = Product::findOrFail($id);
+        $model = product::findOrFail($id);
 
         return response()
             ->json(['model' => $model]);
     }
 
-    public function edit($id)
+
+   public function edit($id)
     {
-        $model = Product::with(['product', 'product.product'])
-            ->findOrFail($id);
+
+        $model = Product::findOrFail($id);
 
         return response()
             ->json(['form' => $model]);
@@ -86,15 +79,13 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $product->fill($request->except('product'));
+        $product->fill($request->all());
         $product->save();
 
-            return response()
-                ->json(['saved' => true, 'id' => $product->id]);
+        return response()
+            ->json(['saved' => true, 'id' => $product->id]);
 
-        }
-
-    
+    }
 
     public function destroy($id)
     {

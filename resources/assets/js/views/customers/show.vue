@@ -88,7 +88,6 @@
         },
         methods: {
             setData(res) {
-                // console.log(res.data.model);
                 Vue.set(this.$data, 'model', res.data.model)
                 this.show = true
                 this.$bar.finish()
