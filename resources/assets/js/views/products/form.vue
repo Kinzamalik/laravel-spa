@@ -7,15 +7,38 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <label>Product</label>
-                        <typeahead :url="customerURL" :initialize="form.customer"
-                            @input="onCustomer" />
-                        <small class="error-control" v-if="errors.customer_id">
-                            {{errors.customer_id[0]}}
-                        </small>
+                        <label>Item Code</label>
+                    <input type="text" class="form-control"  v-model="form.item_code"/>
+                             <small class="error-control" v-if="errors.item_code">
+                            {{errors.item_code[0]}}
+                             </small>
+
+                             <br><br>
+
+                               <label>Description</label>
+                    <input type="text" class="form-control"  v-model="form.description"/>
+                             <small class="error-control" v-if="errors.description">
+                            {{errors.description[0]}}
+                             </small>
+
+                             <br><br>
+                             
+                               <label>Unit Price</label>
+                    <input type="text" class="form-control"  v-model="form.unit_price"/>
+                             <small class="error-control" v-if="errors.unit_price">
+                            {{errors.unit_price[0]}}
+                             </small>
+
                     </div>
                 </div>
-         
+            </div>
+        </div>  
+                <div class="panel-footer flex-end">
+            <div>
+                <button class="btn btn-primary" :disabled="isProcessing" @click="onSave">Save</button>
+                <button class="btn" :disabled="isProcessing" @click="onCancel">Cancel</button>
+            </div>
+        </div> 
     </div>
 </template>
 <script type="text/javascript">
@@ -44,7 +67,6 @@
                 method: 'POST',
                 title: 'Create',
                 productURL: '/api/products',
-                customerURL: '/api/customers'
             }
         },
         beforeRouteEnter(to, from, next) {
@@ -75,29 +97,7 @@
                 this.show = true
                 this.$bar.finish()
             },
-            addNewLine() {
-                this.form.items.push({
-                    product_id: null,
-                    product: null,
-                    unit_price: 0,
-                    qty: 1
-                })
-            },
-            onCustomer(e) {
-                const customer = e.target.value
-                Vue.set(this.$data.form, 'customer', customer)
-                Vue.set(this.$data.form, 'customer_id', customer.id)
-            },
-            onProduct(index, e) {
-                const product = e.target.value
-                Vue.set(this.form.items[index], 'product', product)
-                Vue.set(this.form.items[index], 'product_id', product.id)
 
-                Vue.set(this.form.items[index], 'unit_price', product.unit_price)
-            },
-            removeItem(index) {
-                this.form.items.splice(index, 1)
-            },
             onCancel() {
                 if(this.$route.meta.mode === 'edit') {
                     this.$router.push(`${this.resource}/${this.form.id}`)
@@ -110,7 +110,9 @@
                 this.isProcessing = true
                 byMethod(this.method, this.store, this.form)
                     .then((res) => {
+                        console.log(res.data);
                         if(res.data && res.data.saved) {
+                            console.log(res);
                             this.success(res)
                         }
                     })
@@ -122,8 +124,13 @@
                     })
             },
             success(res) {
+                console.log(res);
+                Vue.set(this.$data, 'form',{});
+                console.log(this.isProcessing)
                 this.$router.push(`${this.resource}/${res.data.id}`)
             }
+
+        },
+        
         }
-    }
 </script>

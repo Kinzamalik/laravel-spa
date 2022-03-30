@@ -11,14 +11,28 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $results = Product::with(['product'])
-            ->orderBy('created_at', 'desc')
+        // dd('hello from create');
+
+        $results = product::orderBy('created_at', 'desc')
             ->paginate(15);
 
         return response()
             ->json(['results' => $results]);
     }
 
+
+    public function create()
+    {
+
+        $form = [
+            "item_code" =>'',
+            "description" => '',
+            'unit_price' => '',
+        ];
+
+        return response()
+            ->json(['form' => $form]);
+    }
 
     public function search()
     {
@@ -37,37 +51,23 @@ class ProductController extends Controller
             ->json(['results' => $results]);
 
     }
-    public function create()
-    {
-        dd('hello from create');
 
-        $form = [
-            "id"=>'',
-            "item_code" =>'',
-            "description" => '',
-            'unit_price' => '',
-        ];
-
-        return response()
-            ->json(['form' => $form]);
-    }
 
     public function store(Request $request)
     {
-        
+        dd('store')
 
         $product = new Product;
-        $product->fill($request->except('items'));
+        $product->fill($request->all());
+        $product->save();
 
      
-        return response()
-            ->json(['saved' => true, 'id' => $product->id]);
+        return response() ->json(['saved' => true, 'id' => $product->id]);
     }
 
     public function show($id)
     {
-        $model = Product::with(['customer', 'items.product'])
-            ->findOrFail($id);
+        $model = Product::findOrFail($id);
 
         return response()
             ->json(['model' => $model]);
@@ -75,49 +75,32 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $form = Product::with(['customer', 'items.product'])
+        $model = Product::with(['product', 'product.product'])
             ->findOrFail($id);
 
         return response()
-            ->json(['form' => $form]);
+            ->json(['form' => $model]);
     }
 
     public function update($id, Request $request)
     {
         $product = Product::findOrFail($id);
 
-        $request->validate([
-            'items' => 'required|array|min:1',
-            'items.*.id' => 'sometimes|required|integer|exists:invoice_items,id,invoice_id,' . $product->id,
-            'items.*.product_id' => 'required|integer|exists:products,id',
-            'items.*.unit_price' => 'required|numeric|min:0',
-            'items.*.qty' => 'required|integer|min:1',
-        ]);
+        $product->fill($request->except('product'));
+        $product->save();
 
-        $product->fill($request->except('items'));
+            return response()
+                ->json(['saved' => true, 'id' => $product->id]);
 
-        $product->sub_total = collect($request->items)->sum(function ($item) {
-            return $item['qty'] * $item['unit_price'];
-        });
+        }
 
-        $product = DB::transaction(function () use ($product, $request) {
-            // custom method from app/Helper/HasManyRelation
-            $product->updateHasMany([
-                'items' => $request->items,
-            ]);
-
-            return $product;
-        });
-
-        return response()
-            ->json(['saved' => true, 'id' => $product->id]);
-    }
+    
 
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
 
-        $product->items()->delete();
+        $product->product()->delete();
 
         $product->delete();
 

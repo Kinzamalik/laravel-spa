@@ -10,17 +10,26 @@
             
                             <label for="">First Name</label>
                             <input type="text" class="form-control"  v-model="form.firstname"/>
+                             <small class="error-control" v-if="errors.firstname">
+                            {{errors.firstname[0]}}
+                             </small>
                             <br>
                                <label for="">Last Name</label>
                             <input type="text" class="form-control"  v-model="form.lastname"/>
+                                   <small class="error-control" v-if="errors.lastname">
+                            {{errors.lastname[0]}}
+                             </small>
                             <br>
                                <label for="">Email</label>
                             <input type="email" class="form-control"  v-model="form.email"/>
+                                   <small class="error-control" v-if="errors.email">
+                            {{errors.email[0]}}
+                             </small>
                             <br>
                                <label for="">Address</label>
                             <input type="text" class="form-control"  v-model="form.address"/>
-                        <small class="error-control" v-if="errors.customer_id">
-                            {{errors.customer_id[0]}}
+                        <small class="error-control" v-if="errors.address">
+                            {{errors.address[0]}}
                         </small>
                     </div>
                 </div>
@@ -125,8 +134,7 @@
                 console.log(res);
                 Vue.set(this.$data, 'form', {});
                 console.log(this.isProcessing);
-                // Vue.set(this.$data, 'isProcessing', false);
-                // this.isProcessing = false
+
 
                 this.$router.push(`${this.resource}/${res.data.id}`)
             }

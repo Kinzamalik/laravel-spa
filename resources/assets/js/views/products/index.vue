@@ -13,17 +13,17 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Item code</th>
+                        <th>Product code</th>
                         <th>Description</th>
                         <th>Unit Price</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in model.data" :key="item.data" @click="detailsPage(item)">
-                        <td class="w-1">{{item.id}}</td>
-                        <td class="w-3">{{item.item_code}}</td>
-                        <td class="w-3">{{item.description}}</td>
-                        <td class="w-9">{{item.unit_price}}</td>
+                    <tr v-for="product in model.data" :key="product.data" @click="detailsPage(product)">
+                        <td class="w-1">{{product.id}}</td>
+                        <td class="w-3">{{product.item_code}}</td>
+                        <td class="w-3">{{product.description}}</td>
+                        <td class="w-9">{{product.unit_price}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -68,8 +68,8 @@
                 })
         },
         methods: {
-            detailsPage(item) {
-                this.$router.push(`/products/${item.id}`)
+            detailsPage(product) {
+                this.$router.push(`/products/${product.id}`)
             },
             setData(res) {
                 Vue.set(this.$data, 'model', res.data.results)

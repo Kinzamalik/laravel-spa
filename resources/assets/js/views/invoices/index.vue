@@ -84,7 +84,6 @@
                 if(this.model.next_page_url) {
                     const query = Object.assign({}, this.$route.query)
                     query.page = query.page ? (Number(query.page) + 1) : 2
-
                     this.$router.push({
                         path: '/invoices',
                         query: query
@@ -95,7 +94,6 @@
                 if(this.model.prev_page_url) {
                     const query = Object.assign({}, this.$route.query)
                     query.page = query.page ? (Number(query.page) - 1) : 1
-
                     this.$router.push({
                         path: '/invoices',
                         query: query

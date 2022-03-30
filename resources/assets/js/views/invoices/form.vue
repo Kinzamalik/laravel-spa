@@ -147,13 +147,11 @@
     import Vue from 'vue'
     import {get, byMethod } from '../../lib/api'
     import {Typeahead } from '../../components/typeahead'
-
     function initialize(to) {
         let urls = {
             'create': `/api/invoices/create`,
             'edit': `/api/invoices/${to.params.id}/edit`
         }
-
         return (urls[to.meta.mode] || urls['create'])
     }
     export default {
@@ -169,7 +167,7 @@
                 method: 'POST',
                 title: 'Create',
                 productURL: '/api/products',
-                customerURL: '/api/customers'
+                customerURL: '/api/customers/search'
             }
         },
         beforeRouteEnter(to, from, next) {
@@ -199,13 +197,11 @@
         methods: {
             setData(res) {
                 Vue.set(this.$data, 'form', res.data.form)
-
                 if(this.$route.meta.mode === 'edit') {
                     this.store = `/api/invoices/${this.$route.params.id}`
                     this.method = 'PUT'
                     this.title = 'Edit'
                 }
-
                 this.show = true
                 this.$bar.finish()
             },
@@ -218,15 +214,15 @@
                 })
             },
             onCustomer(e) {
+                console.log("customer");
                 const customer = e.target.value
-                Vue.set(this.$data.form, 'customer', customer)
-                Vue.set(this.$data.form, 'customer_id', customer.id)
+                Vue.set(this.form, 'customer', customer)
+                Vue.set(this.form, 'customer_id', customer.id)
             },
             onProduct(index, e) {
                 const product = e.target.value
                 Vue.set(this.form.items[index], 'product', product)
                 Vue.set(this.form.items[index], 'product_id', product.id)
-
                 Vue.set(this.form.items[index], 'unit_price', product.unit_price)
             },
             removeItem(index) {
