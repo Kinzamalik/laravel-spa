@@ -8,7 +8,7 @@ Route::get('/', function () {
 });
 
 Route::get('/api/customers/search', [CustomerController::class, 'search']);
-Route::get('/api/products/search', [ProductController::class, 'search']);
+Route::get('/api/products', [ProductController::class, 'search']);
 Route::resource('/api/invoices', InvoiceController::class);
 
 Route::resource('/api/customers', CustomerController::class);

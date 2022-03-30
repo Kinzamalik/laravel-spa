@@ -2670,7 +2670,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3579,6 +3578,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3796,7 +3839,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     component: (__webpack_require__(/*! ../views/products/form.vue */ "./resources/assets/js/views/products/form.vue")["default"])
   }, {
     path: "/products/:id/edit",
-    component: (__webpack_require__(/*! ../views/products/form.vue */ "./resources/assets/js/views/products/form.vue")["default"])
+    component: (__webpack_require__(/*! ../views/products/form.vue */ "./resources/assets/js/views/products/form.vue")["default"]),
+    meta: {
+      mode: "edit"
+    }
   }, {
     path: "/products/:id",
     component: (__webpack_require__(/*! ../views/products/show.vue */ "./resources/assets/js/views/products/show.vue")["default"])
@@ -6839,10 +6885,75 @@ var render = function () {
             1
           ),
         ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "document" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-6" }, [
+                _c("strong", [_vm._v("To:")]),
+                _vm._v(" "),
+                _c("div", [
+                  _c("span", [_vm._v(_vm._s(_vm.model.text))]),
+                  _vm._v(" "),
+                  _c("pre", [_vm._v(_vm._s(_vm.model.address))]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-6 col-offset-12" }, [
+                _c("table", { staticClass: "document-summary" }, [
+                  _c("tbody", [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Id")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.model.id))]),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Product Code")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.model.product_code))]),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("Description")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.model.description))]),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v(" Unit Price")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.model.unit_price))]),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", [_vm._v("text")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.model.text))]),
+                    ]),
+                  ]),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
       ])
     : _vm._e()
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "2" } }, [
+        _c("span", { staticClass: "document-title" }, [_vm._v("CUSTOMER")]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 

@@ -46,8 +46,7 @@
                                     <td>Address</td>
                                     <td>{{model.address}}</td>
                                 </tr>
-                                </tr>
-                                   <tr>
+                                <tr>
                                     <td>text</td>
                                     <td>{{model.text}}</td>
                                 </tr>

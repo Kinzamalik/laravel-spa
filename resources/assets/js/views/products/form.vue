@@ -126,7 +126,8 @@
             success(res) {
                 console.log(res);
                 Vue.set(this.$data, 'form',{});
-                console.log(this.isProcessing)
+                console.log(this.isProcessing);
+                
                 this.$router.push(`${this.resource}/${res.data.id}`)
             }
 
