@@ -166,7 +166,7 @@
                 store: '/api/invoices',
                 method: 'POST',
                 title: 'Create',
-                productURL: '/api/products',
+                productURL: '/api/products/search',
                 customerURL: '/api/customers/search'
             }
         },

@@ -2481,119 +2481,9 @@ function initialize(to) {
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/views/customers/index.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/api */ "./resources/assets/js/lib/api.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      model: {
-        data: []
-      }
-    };
-  },
-  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)('/api/customers', to.query).then(function (res) {
-      next(function (vm) {
-        return vm.setData(res);
-      });
-    });
-  },
-  beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
-    var _this = this;
-
-    (0,_lib_api__WEBPACK_IMPORTED_MODULE_0__.get)('/api/customers', to.query).then(function (res) {
-      _this.setData(res);
-
-      next();
-    });
-  },
-  methods: {
-    detailsPage: function detailsPage(customer) {
-      this.$router.push("/customers/".concat(customer.id));
-    },
-    setData: function setData(res) {
-      vue__WEBPACK_IMPORTED_MODULE_1__["default"].set(this.$data, 'model', res.data.results);
-      this.page = this.model.current_page;
-      this.$bar.finish();
-    },
-    nextPage: function nextPage() {
-      if (this.model.next_page_url) {
-        var query = Object.assign({}, this.$route.query);
-        query.page = query.page ? Number(query.page) + 1 : 2;
-        this.$router.push({
-          path: '/customers',
-          query: query
-        });
-      }
-    },
-    prevPage: function prevPage() {
-      if (this.model.prev_page_url) {
-        var query = Object.assign({}, this.$route.query);
-        query.page = query.page ? Number(query.page) - 1 : 1;
-        this.$router.push({
-          path: '/customers',
-          query: query
-        });
-      }
-    }
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\laragon_old\\www\\spa-invoice\\resources\\assets\\js\\views\\customers\\index.vue: Unexpected token, expected \",\" (63:17)\n\n\u001b[0m \u001b[90m 61 |\u001b[39m                 model\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 62 |\u001b[39m                     data\u001b[33m:\u001b[39m []\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 63 |\u001b[39m                  para\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 64 |\u001b[39m                 }\u001b[0m\n\u001b[0m \u001b[90m 65 |\u001b[39m             }\u001b[0m\n\u001b[0m \u001b[90m 66 |\u001b[39m         }\u001b[33m,\u001b[39m\u001b[0m\n    at instantiate (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:72:32)\n    at constructor (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:358:12)\n    at Parser.raise (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:3334:19)\n    at Parser.unexpected (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:3372:16)\n    at Parser.expect (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:4001:28)\n    at Parser.parseObjectLike (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:13481:14)\n    at Parser.parseExprAtom (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12889:23)\n    at Parser.parseExprSubscripts (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12539:23)\n    at Parser.parseUpdate (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12518:21)\n    at Parser.parseMaybeUnary (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12489:23)\n    at Parser.parseMaybeUnaryOrPrivate (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12283:61)\n    at Parser.parseExprOps (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12290:23)\n    at Parser.parseMaybeConditional (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12260:23)\n    at Parser.parseMaybeAssign (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12213:21)\n    at D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:12171:39\n    at Parser.allowInAnd (D:\\laragon_old\\www\\spa-invoice\\node_modules\\@babel\\parser\\lib\\index.js:14237:12)");
 
 /***/ }),
 
@@ -2903,7 +2793,7 @@ function initialize(to) {
       store: '/api/invoices',
       method: 'POST',
       title: 'Create',
-      productURL: '/api/products',
+      productURL: '/api/products/search',
       customerURL: '/api/customers/search'
     };
   },
@@ -5394,6 +5284,35 @@ var render = function () {
   return _c("div", { staticClass: "panel" }, [
     _c("div", { staticClass: "panel-heading" }, [
       _c("span", { staticClass: "panel-title" }, [_vm._v("Customers")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.param.q,
+              expression: "param.q",
+            },
+          ],
+          attrs: { type: "text", placeholder: "Search" },
+          domProps: { value: _vm.param.q },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.param, "q", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", on: { onClick: _vm.onSearch } },
+          [_vm._v("Search")]
+        ),
+      ]),
       _vm._v(" "),
       _c(
         "div",
