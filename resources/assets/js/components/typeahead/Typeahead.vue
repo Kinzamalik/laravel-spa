@@ -35,7 +35,6 @@
 <script type="text/javascript">
     import Vue from 'vue'
     import { get } from '../../lib/api'
-
     export default {
         props: {
             initialize: {

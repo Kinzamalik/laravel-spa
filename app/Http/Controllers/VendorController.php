@@ -2,49 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use Illuminate\Http\Request;
+use App\Models\Vendor;
 
-class CustomerController extends Controller
+class VendorController extends Controller
 {
     public function index()
     {
 
-        $results = customer::orderBy('created_at', 'desc')
+        $results = Vendor::orderBy('created_at', 'desc')
             ->paginate(15);
 
-        return response()
-            ->json(['results' => $results]);
-
-
-
-            $search = $request['search'] ?? "";
-            // where
-            if($search != ""){
-                $customers = Customer::where('first_name','Like', '%$search%')->orwhere('email','Like','%$search%')->get();
-            }else{
-                $customers = Customer::all();
-            }
-            $data = compact('customers','search');
-            return view('index-view')->with($data);
+        return response()->json(['results' => $results]);
+        //  dd('vendor');
 
     }
 
     public function create()
     {
-        // dd('testing');
+
         $form = [
             'firstname' => '',
             'lastname' => '',
             'email' => '',
             'address' => '',
-
         ];
+
         return response()
             ->json(['form' => $form]);
+
     }
 
-    public function search()
+     public function search()
     {
 
         $results = Customer::orderBy('firstname')
@@ -71,20 +59,17 @@ class CustomerController extends Controller
             'lastname' => 'required|string|max:255',
             'email' => "required|string|email|max:255|unique:users",
             'address' => 'required|string',
-
         ]);
-        $customer = new Customer;
-        $customer->fill($request->all());
-        $customer->save();
+        $vendor = new Vendor;
+        $vendor->fill($request->all());
+        $vendor->save();
 
-        return response()->json(['saved' => true, 'id' => $customer->id]);
-
+        return response()->json(['saved' => true, 'id' => $vendor->id]);
     }
 
     public function show($id)
     {
-        $model = Customer::findOrFail($id);
-
+        $model = Vendor::findOrFail($id);
         return response()
             ->json(['model' => $model]);
 
@@ -92,33 +77,32 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-
-        $model = Customer::findOrFail($id);
+       
+        $model = Vendor::findOrFail($id);
 
         return response()
             ->json(['form' => $model]);
     }
 
     public function update($id, Request $request)
+
     {
-
-        $customer = Customer::findOrFail($id);
-
-        $customer->fill($request->all());
-        $customer->save();
+        $vendor = Vendor::findOrFail($id);
+        $vendor->fill($request->all());
+        $vendor->save();
 
         return response()
-            ->json(['saved' => true, 'id' => $customer->id]);
-
+            ->json(['saved'=> true, 'id' => $vendor->id]);
     }
 
     public function destroy($id)
     {
-        $customer = Customer::findOrFail($id);
+        dd('dd');
+        $vendor = Vendor::findOrFail($id);
+        $vendor->vendor()->delete();
+        $vendor->delete();
 
-        $customer->customer()->delete();
-
-        $customer->delete();
+        return delete();
 
         return response()
             ->json(['deleted' => true]);

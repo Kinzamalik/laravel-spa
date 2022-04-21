@@ -58,11 +58,18 @@ const router = new VueRouter({
         {
             path: "/products/:id/edit",
             component: require("../views/products/form.vue").default,
-            meta:{mode:"edit"},
+            meta: { mode: "edit" },
         },
         {
             path: "/products/:id",
             component: require("../views/products/show.vue").default,
+        },
+
+        // Vendor
+
+        {
+            path: "/vendors",
+            component: require("../views/vendors/index.vue").default,
         },
     ],
 });

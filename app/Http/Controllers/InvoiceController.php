@@ -11,12 +11,21 @@ class InvoiceController extends Controller
 {
     public function index()
     {
+// $search = $request->get('q');
+        //     ->orderBy('created_at', 'desc')
+
         $results = Invoice::with(['customer'])
             ->orderBy('created_at', 'desc')
-            ->paginate(15);
 
+            ->when(request('number'), function ($q) {
+                $q->where('number', request('number'));
+
+            })->paginate(15);
+
+        // dd($results);
         return response()
             ->json(['results' => $results]);
+
     }
 
     public function create()
@@ -152,4 +161,5 @@ class InvoiceController extends Controller
         return response()
             ->json(['deleted' => true]);
     }
+
 }

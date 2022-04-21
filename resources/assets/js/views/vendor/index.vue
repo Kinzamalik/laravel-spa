@@ -1,15 +1,15 @@
         <template>
             <div class="panel">
                 <div class="panel-heading">
-                    <span class="panel-title">Customers</span>
+                    <span class="panel-title">Vendors</span>
                     <div>
                         <input type="text" v-model="first_name"  placeholder="First Name" />
                     <button class="btn btn-primary" @click="search">Search</button>
                     </div>
                     
                     <div>
-                        <router-link to="/customers/create" class="btn btn-primary">
-                            New Customer
+                        <router-link to="/vendors/create" class="btn btn-primary">
+                            New Vendor
                         </router-link>
                     </div>
                     
@@ -26,12 +26,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="customer in model.data" :key="customer.data" @click="detailsPage(customer)">
-                                <td class="w-1">{{customer.id}}</td>
-                                <td class="w-3">{{customer.firstname}}</td>
-                                <td class="w-3">{{customer.lastname}}</td>
-                                <td class="w-9">{{customer.email}}</td>
-                                <td class="w-3">{{customer.address}}</td>
+                            <tr v-for="vendor in model.data" :key="vendor.data" @click="detailsPage(vendor)">
+                                <td class="w-1">{{vendor.id}}</td>
+                                <td class="w-3">{{vendor.firstname}}</td>
+                                <td class="w-3">{{vendor.lastname}}</td>
+                                <td class="w-9">{{vendor.email}}</td>
+                                <td class="w-3">{{vendor.address}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,21 +65,21 @@
                     }
                 },
                 beforeRouteEnter(to, from, next) {
-                    get('/api/customers', to.query)
+                    get('/api/vendors', to.query)
                         .then((res) => {
                             next(vm => vm.setData(res))
                         })
                 },
                 beforeRouteUpdate(to, from, next) {
-                    get('/api/customers', to.query)
+                    get('/api/vendors', to.query)
                         .then((res) => {
                             this.setData(res)
                             next()
                         })
                 },
                 methods: {
-                    detailsPage(customer) {
-                        this.$router.push(`/customers/${customer.id}`)
+                    detailsPage(vendor) {
+                        this.$router.push(`/vendors/${vendor.id}`)
                     },
                     setData(res) {
                         Vue.set(this.$data, 'model', res.data.results)
@@ -92,7 +92,7 @@
                             query.page = query.page ? (Number(query.page) + 1) : 2
 
                             this.$router.push({
-                                path: '/customers',
+                                path: '/vendors',
                                 query: query
                             })
                         }
@@ -103,7 +103,7 @@
                             query.page = query.page ? (Number(query.page) - 1) : 1
 
                             this.$router.push({
-                                path: '/customers',
+                                path: '/vendors',
                                 query: query
                             })
                         }
